@@ -14,4 +14,18 @@ if ($_SERVER['REQUEST_METHOD']== 'GET') {
 }
 
 //http://localhost/estate/api/v1.0/list.php
+
+//step 1 - initialize curl
+// $curlobj = curl_init();
+// $url = "http://localhost/estate/api/v1.0/list.php";
+//step2 : set curl options using the function curl_setopt()
+// curl_setopt($curlobj,CURLOPT_RETURNTRANSFER, true); //true will tell curl to return the string instead of print it out..
+// curl_setopt($curlobj, CURLOPT_URL,$url);
+//step 3 : execute the curl session using curl_exec()
+// $response = curl_exec($curlobj);
+//step 4: close the opened curl session
+// curl_close($curlobj);
+//step 5 : do whatever you want to do with the response
+// $response_inphp_obj = json_decode($response);
+
 ?>

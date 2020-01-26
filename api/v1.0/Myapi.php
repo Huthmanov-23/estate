@@ -28,17 +28,37 @@ class Myapi{
 
 
 	}
-	function add_resident($fname,$lname,$pwd,$phone,$email,$profile){
+	public function get_single_resident($id){
+		$sql = "SELECT resident_id as id, resident_fname as fname,resident_lname as lname,resident_userid as userid,resident_phone as phone FROM residents WHERE resident_id = '$id'";
+		$result = $this->conn->query($sql);
+		if ($result->num_rows > 0) {
+			$rows = $result->fetch_assoc();
+			$message = $rows;
+			$status = 1;
+		}else{
+			$message = "No residents found";
+			$status = 0;
+			return json_encode($message);
+		}
+		$ret = array('message'=>$message,"status"=>$status);
+		echo json_encode($ret);
+
+
+
+	}
+    public function add_resident($fname,$lname,$pwd,$phone,$email,$profile){
 	$encrypted_pass=md5($pwd);
 	$sql="INSERT INTO residents SET 
-		               resident_fname= '$fname',
-		               resident_lname='$lname',
-		               resident_phone='$phone',
-		               resident_email='$email',
-		               resident_bio='$profile', 
-		               resident_pwd='$encrypted_pass'";
+		              resident_fname= '$fname',
+		              resident_lname='$lname',
+		              resident_phone='$phone',
+		              resident_email='$email',
+		              resident_bio='$profile', 
+		              resident_pwd='$encrypted_pass'";
 	$this->conn->query($sql);// ran the query
 	$id = $this->conn->insert_id;// check if it inserted into  the table and gives the id;
+	$error = $this->conn->error;
+	echo "$error";
 	$userid =0;
 	if ($id >0) {
 		$userid="COH". '/'.date('Y'). '/'. $id;

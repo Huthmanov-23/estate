@@ -57,7 +57,7 @@ require('header.php');
           <li>Connect with other elites living in Cohort 13 Estate</li>
           <li>Purchase Estate's Sourveniors</li>
         </ul>
-        <p>By the way, this is a test content, just ignore with all your strenght and power, you are advised not to take it serious as much as you can.</p>
+        
       </div>
     
 

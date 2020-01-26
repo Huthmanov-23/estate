@@ -32,8 +32,8 @@ require 'header.php';
     <div class="row">
       <!-- Sidebar Column -->
       <div class="col-lg-3 mb-4">
-	  <div>
-	  <img src="<?php
+    <div>
+    <img src="<?php
 
     if($rows['resident_picture']!=''){
       echo 'uploaded/'.$rows['resident_picture'];
@@ -42,11 +42,11 @@ require 'header.php';
     }
 
     ?>" class='img-fluid'>
-	  <form method="POST" action="image_upload.php" enctype="multipart/form-data">
-	  <input type='file' class="mb-2" name='mypix'>
+    <form method="POST" action="image_upload.php" enctype="multipart/form-data">
+    <input type='file' class="mb-2" name='mypix'>
     <button class="btn btn-info mb-2">Upload Picture</button>
-	  </form>
-	  </div>
+    </form>
+    </div>
         <div class="list-group">
           <a href="profile.php" class="list-group-item">Home</a>
           <a href="edit.php" class="list-group-item">Edit Profile</a>
@@ -63,6 +63,31 @@ require 'header.php';
           echo ucwords($rows['resident_fname']." " . $rows['resident_lname']);
         ?></h2>
         <p>A welcome is a kind of greeting designed to introduce a person to a new place or situation, and to make them feel at ease. The term can similarly be used to describe the feeling of being accepted on the part of the new person. In some contexts, a welcome is extended to a stranger to an area or a household..</p>
+        <?php
+
+         if (isset($_GET['message']) && $_GET['message'] == 'success') {
+            echo "<div class='alert alert-success alert-dismissible fade show mb-2' role='alert'>";
+            echo "Password has been successfully changed";
+            echo "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                  <span aria-hidden='true'>&times;</span>
+                  </button>";
+            echo "</div>";
+          }
+
+        ?>
+
+        <form action="password.php" method="POST" id="form" class="p-3 shadow rounded w-50">
+          <div class="form-group">
+            <label for="pwd1">New Password</label>
+            <input type="password" name="pwd" id="pwd1" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="pwd2">Confirm New Password</label>
+            <input type="password" id="pwd2" class="form-control">
+          </div>
+          <p id="para"  class="mt-2 text-danger mb-2"></p>
+          <button type="submit" id="submit" class="btn btn-success mt-2">Update Password</button>
+        </form>
       </div>
     </div>
     <!-- /.row -->
@@ -81,35 +106,19 @@ require 'header.php';
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+     <script type="text/javascript">
+            $(document).ready(function(){  
+                $("form").submit(function(event) {
+                var pwd1 = $("#pwd1").val();
+                var pwd2 = $("#pwd2").val();
+                  if (pwd1 != pwd2) {
+                    event.preventDefault();
+                     $("#para").text("Passwords do not match");
+                  }
+                });
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Member's Login Form</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action='login.php'>
-  <div class="form-group">
-    <label for="exampleInputEmail1">User ID</label>
-    <input type="text" name='userid' class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-     
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" name='pwd' class="form-control" id="exampleInputPassword1">
-  </div>
-   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-  <button type="submit" class="btn btn-info">Login</button>
-</form>
-      </div>
-      
-    </div>
-  </div>
-</div>
+            });
+          </script>
 </body>
 
 </html>

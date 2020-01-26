@@ -31,20 +31,25 @@ require 'header.php';
 	// echo "</pre>";
 	?>
 	 <!-- Content Row -->
-    <div class="row">
+    <div class="row mt-5">
       <!-- Sidebar Column -->
       <div class="col-lg-3 mb-4">
 	  <div>
-	  <img src='profile/p1.jpg' class='img-fluid'>
-	  <form>
-	  <input type='file' name='mypix'>
-	  </form>
+	  <img src="<?php
+
+    if($rows['resident_picture']!=''){
+      echo 'uploaded/'.$rows['resident_picture'];
+    }else{
+      echo 'uploaded/male_avatar.png';
+    }
+
+    ?>" class='img-fluid'>
 	  </div>
         <div class="list-group">
-          <a href="index.php" class="list-group-item">Home</a>
-          <a href="" class="list-group-item">Edit Profile</a>
-          <a href="payment.php" class="list-group-item">My Payments</a>
-          <a href="shop.php" class="list-group-item">Shop</a>
+          <a href="profile.php" class="list-group-item">Home</a>
+          <a href="edit.php" class="list-group-item">Edit Profile</a>
+          <a href="payments.php" class="list-group-item">My Payments</a>
+          <a href="pass.php" class="list-group-item">Change Password</a>
           <a href="logout.php" class="list-group-item">Logout</a>
          
           
@@ -70,16 +75,12 @@ require 'header.php';
   	$i =1;  $total=0;
   	foreach ($deets as $deet) {
   		echo "<tr>";
-  		echo "<td>$i</td><td>".$deet['bill_name']."</td><td>".$deet['pay_amt']."</tr>";
+  		echo "<td>$i</td><td>".$deet['bill_name']."</td><td>&#8358;".number_format($deet['pay_amt'],2)."</tr>";
   		echo "</tr>";
   		$i++;
   		$total = $total + $deet['pay_amt'];
+      $_SESSION['total'] = $total;
       	      }
-  	
-
-
-
-
   	?>
   	
   <tr> 

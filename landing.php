@@ -39,6 +39,7 @@ if ($request) {
           @ If the user changes his email on your system, it will be unusable
           */
           echo "Transaction was successful";
+          $r->paid($transref);
         }else{
           // the transaction was not successful, do not deliver value'
           // print_r($result);  //uncomment this line to inspect the result, to check why it failed.

@@ -20,7 +20,7 @@
 
   <!-- Custom styles for this template -->
   <link href="css/style.css" rel="stylesheet">
-  
+  <script src="vendor/jquery/jquery.min.js" type="text/javascript" ></script>
 <style type="text/css">
 .nav-link{ color:white;}
 .nav-link:hover{
@@ -62,7 +62,7 @@
             ?>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-              <a class="dropdown-item" href="profile.php">Edit Profile</a>
+              <a class="dropdown-item" href="edit.php">Edit Profile</a>
               <a class="dropdown-item" href="payments.php">My Payments</a>
               <a class="dropdown-item" href="shop.php">Shop</a>
             </div>

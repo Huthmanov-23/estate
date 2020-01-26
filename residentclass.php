@@ -129,6 +129,38 @@ function get_transaction_details($transref){
 	}
 	return $rows;
 }
+function paid($transref){
+	$sql = "UPDATE bills_payment SET pay_status = 'Paid' WHERE pay_trxref = '$transref'";
+	$result = $this->conn->query($sql);
+	return $result;
+}
+function editprofile($fname,$lname,$email,$phone,$add,$id){
+	$sql = "UPDATE residents set resident_fname= '$fname',
+					              resident_lname='$lname',
+					              resident_phone='$phone',
+					              resident_email='$email',
+					              resident_address='$add' WHERE resident_id = '$id'";
+	$result = $this->conn->query($sql);
+	return $result;
+}
+function getAllResidents(){
+	$sql = "SELECT * FROM residents";
+	$result = $this->conn->query($sql);
+	$rows = [];
+	if ($result->num_rows > 0) {
+		 while ($row= $result->fetch_assoc()) {
+		 	$rows[]= $row;
+		 }
+	}
+	return $rows;
+}
+function changepassword($pwd,$id){
+	$sql = "UPDATE residents SET resident_pwd = '$pwd' WHERE resident_id = '$id'";
+	$result = $this->conn->query($sql);
+	$error = $this->conn->error;
+	echo "$error";
+	return $result;
+}
 
 }
 
